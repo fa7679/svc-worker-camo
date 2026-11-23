@@ -1,6 +1,6 @@
 FROM teddysun/xray:latest
 
-RUN apk add --no-cache nginx sed netcat-openbsd
+RUN apk add --no-cache nginx sed netcat-openbsd su-exec
 
 COPY config.json /etc/xray/config.json
 COPY nginx.conf.tpl /opt/tpl/nginx.conf.tpl
