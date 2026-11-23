@@ -8,9 +8,9 @@ X="${XPORT:-10001}"
 sed -e "s/__PORT__/$P/g" -e "s/__XPORT__/$X/g" /opt/tpl/nginx.conf.tpl > /tmp/nginx.conf
 sed -e "s/\"port\": 10001/\"port\": $X/" /etc/xray/config.json > /tmp/xray.json
 
-# nginx 会以 uid 100 运行，临时目录必须可写（容器在 userns 里，chown 会 EPERM）
-mkdir -p /tmp/ngx-body /tmp/ngx-proxy /tmp/ngx-fastcgi /tmp/ngx-uwsgi /tmp/ngx-scgi
-chmod 777 /tmp /tmp/ngx-body /tmp/ngx-proxy /tmp/ngx-fastcgi /tmp/ngx-uwsgi /tmp/ngx-scgi
+# 容器在 userns 里，无法切 uid，也没有 /var/lib/nginx 的写权限，全部走 /tmp
+mkdir -p /tmp/ngx-body /tmp/ngx-proxy /tmp/ngx-fastcgi /tmp/ngx-uwsgi /tmp/ngx-scgi /tmp/ngx-logs
+chmod 777 /tmp/ngx-body /tmp/ngx-proxy /tmp/ngx-fastcgi /tmp/ngx-uwsgi /tmp/ngx-scgi /tmp/ngx-logs
 chmod 644 /tmp/nginx.conf
 
 /usr/bin/xray -config /tmp/xray.json &
@@ -25,5 +25,4 @@ while [ $i -lt 10 ]; do
     sleep 1
 done
 
-# 非 root 跑 nginx：master 不以 root 运行时就不会去 chown 临时目录
-exec su-exec 100:100 nginx -c /tmp/nginx.conf -g "daemon off;"
+exec nginx -c /tmp/nginx.conf -g "daemon off;"
