@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vertex API — Realtime data endpoints for builders</title>
+<meta name="description" content="Vertex API provides low-latency JSON endpoints for teams building dashboards, bots and internal tools.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#111827; --muted:#6b7280; --line:#e5e7eb;
+    --brand:#2563eb; --soft:#f9fafb;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+  header{border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.01em}
+  .dot{width:10px;height:10px;border-radius:3px;background:var(--brand);display:inline-block}
+  .nav-links{display:flex;gap:26px;font-size:14px;color:var(--muted)}
+  .nav-links a:hover{color:var(--fg)}
+  .hero{padding:88px 0 64px}
+  h1{font-size:44px;line-height:1.15;letter-spacing:-.02em;margin:0 0 18px;font-weight:650}
+  .lede{font-size:18px;color:var(--muted);max-width:600px;margin:0 0 30px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{padding:11px 20px;border-radius:8px;font-size:15px;font-weight:500;border:1px solid var(--line)}
+  .btn.primary{background:var(--fg);color:#fff;border-color:var(--fg)}
+  .btn:hover{opacity:.9}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;padding:8px 0 72px}
+  .card{border:1px solid var(--line);border-radius:12px;padding:22px}
+  .card h3{margin:0 0 8px;font-size:16px;font-weight:600}
+  .card p{margin:0;color:var(--muted);font-size:14.5px}
+  .code{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:18px 20px;
+        font:13.5px/1.7 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-x:auto;color:#374151}
+  .code .k{color:var(--brand)}
+  section.quick{padding:0 0 80px}
+  h2{font-size:22px;letter-spacing:-.01em;margin:0 0 16px}
+  footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:13.5px}
+  .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .status{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--muted)}
+  .status i{width:7px;height:7px;border-radius:50%;background:#16a34a;display:inline-block}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="brand"><span class="dot"></span>Vertex API</div>
+    <nav class="nav-links">
+      <a href="/">Overview</a>
+      <a href="/#quickstart">Quickstart</a>
+      <a href="/#status">Status</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>Realtime data endpoints<br>for people who ship.</h1>
+    <p class="lede">A small, dependable JSON API for dashboards, bots and internal tools.
+       Single region, predictable latency, no SDK required.</p>
+    <div class="cta">
+      <a class="btn primary" href="/#quickstart">Get started</a>
+      <a class="btn" href="/#status">Service status</a>
+    </div>
+  </section>
+
+  <div class="grid">
+    <div class="card">
+      <h3>One endpoint</h3>
+      <p>Everything is a plain HTTPS GET. No tokens to rotate, no vendor lock-in.</p>
+    </div>
+    <div class="card">
+      <h3>Streaming ready</h3>
+      <p>WebSocket streaming for incremental updates on long-lived connections.</p>
+    </div>
+    <div class="card">
+      <h3>Boring by design</h3>
+      <p>Static responses, stable schema, no surprise breaking changes.</p>
+    </div>
+  </div>
+
+  <section class="quick" id="quickstart">
+    <h2>Quickstart</h2>
+    <div class="code">
+<span class="k">curl</span> -s https://svc-worker.hostless.app/api/v1/ping<br>
+{ "ok": true, "region": "eu-north", "latency_ms": 12 }
+    </div>
+  </section>
+
+  <section class="quick" id="status">
+    <h2>Status</h2>
+    <p class="status"><i></i>All systems operational · last checked just now</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Vertex API. Built for small teams.</span>
+    <span>eu-north · single region</span>
+  </div>
+</footer>
+</body>
+</html>
